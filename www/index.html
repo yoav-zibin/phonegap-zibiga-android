@@ -21,7 +21,7 @@
       
       function onDeviceReady() {
         mylog('Got deviceready');
-        setUpPushNotification();
+        setUpFcm();
         signInWithGoogle();
       }
 
@@ -44,6 +44,46 @@
         });
       }
 
+      function setUpFcm() {
+        if (!PushNotification) {
+          mylog("PushNotification not installed!");
+          return;
+        }
+        const push = PushNotification.init({
+          android: {
+          },
+            browser: {
+                pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+            },
+          ios: {
+            alert: "true",
+            badge: "true",
+            sound: "true"
+          },
+          windows: {}
+        });
+
+        push.on('registration', (data) => {
+          mylog("registration data=" + JSON.stringify(data) );
+          // data.registrationId
+        });
+
+        push.on('notification', (data) => {
+          mylog("notification data=" + JSON.stringify(data) );
+          // data.message,
+          // data.title,
+          // data.count,
+          // data.sound,
+          // data.image,
+          // data.additionalData
+        });
+
+        push.on('error', (e) => {
+          mylog("error e=" + JSON.stringify(e) );
+          // e.message
+        });
+      }
+      
       function setUpPushNotification() {
         if (!FCMPlugin) {
           mylog("FCMPlugin not installed!");
