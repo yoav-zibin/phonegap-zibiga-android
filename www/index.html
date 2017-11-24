@@ -21,10 +21,10 @@
       
       function onDeviceReady() {
         mylog('Got deviceready');
-        setUpFcm();
-        signInWithGoogle();
+        //setUpFcm();
+        //signInWithGoogle();
       }
-
+/*
       function signInWithGoogle() {
         var provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithRedirect(provider).then(function() {
@@ -83,28 +83,7 @@
           // e.message
         });
       }
-      
-      function setUpPushNotification() {
-        if (!FCMPlugin) {
-          mylog("FCMPlugin not installed!");
-          return;
-        }
-        FCMPlugin.onTokenRefresh(function(token){
-          mylog("onTokenRefresh token=" + token);
-        });
-        FCMPlugin.getToken(function(token){
-          mylog("getToken token=" + token);
-        });
-        FCMPlugin.onNotification(function(data){
-          mylog("onNotification data=" + JSON.stringify(data) );
-          if(data.wasTapped){
-            //Notification was received on device tray and tapped by the user.
-          }else{
-            //Notification was received in foreground. Maybe the user needs to be notified.
-          }
-        });
-
-      }
+      */
     </script>
   </body>
 </html>
