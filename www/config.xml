@@ -103,12 +103,15 @@
     <icon src="pgbomit/icon-40.png" gap:platform="ios" width="40" height="40" />
     <icon src="pgbomit/icon-80.png" gap:platform="ios" width="80" height="80" />
 
-    <!-- see: https://www.npmjs.com/package/cordova-plugin-fcm -->
-
+    <!-- see: https://github.com/phonegap/phonegap-plugin-push/blob/HEAD/docs/PHONEGAP_BUILD.md -->
     <platform name="android">
-        <resource-file src="google-services.json" target="/google-services.json" />
+        <resource-file src="google-services.json" target="google-services.json" />
     </platform>
-    <gap:plugin name="cordova-plugin-fcm" source="npm" spec="2.1.2" />
+    <platform name="ios">
+        <resource-file src="GoogleService-Info.plist" />
+    </platform>
+    <!-- https://www.npmjs.com/package/phonegap-plugin-push -->
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.1.1" />
 
     <!-- I think the push plugin is adding iOS code that might use the calendar, photos, and bluetooth.
         So Apple rejects the submission with:
@@ -162,6 +165,20 @@
     <gap:plugin name="cordova-plugin-admobpro" source="npm" spec="2.29.29" />
     <gap:plugin name="cordova-plugin-admob-facebook" source="npm" spec="4.23.0" />
     
+    <!-- https://firebase.google.com/docs/auth/web/cordova -->
+    <gap:plugin name="cordova-plugin-buildinfo" source="npm" spec="2.0.1" />
+    <gap:plugin name="cordova-universal-links-plugin" source="npm" spec="1.2.1" />
+    <gap:plugin name="cordova-plugin-browsertab" source="npm" spec="0.2.0" />
+    <gap:plugin name="cordova-plugin-inappbrowser" source="npm" spec="1.7.2" />
+    <gap:plugin name="cordova-plugin-customurlscheme" source="npm" spec="4.3.0">
+        <param name="URL_SCHEME" value="com.zibiga.GamePortalTest" />
+    </gap:plugin>
+    <universal-links>
+        <host name="j68c5.app.goo.gl" scheme="https" />
+        <host name="universalgamemaker.firebaseapp.com" scheme="https">
+            <path url="/__/auth/callback"/>
+        </host>
+    </universal-links>
     <preference name="AndroidLaunchMode" value="singleTask" />
 
 </widget>
