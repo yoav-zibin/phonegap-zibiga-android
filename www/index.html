@@ -45,6 +45,10 @@
       }
 
       function setUpPushNotification() {
+        if (!FCMPlugin) {
+          mylog("FCMPlugin not installed!");
+          return;
+        }
         FCMPlugin.onTokenRefresh(function(token){
           mylog("onTokenRefresh token=" + token);
         });
