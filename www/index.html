@@ -22,7 +22,7 @@
         document.getElementById('mylogs').value += msg + "\n";
       }
 
-      mylog('waiting for deviceready6');
+      mylog('waiting for deviceready7');
       document.addEventListener("deviceready", onDeviceReady);
       
       function onDeviceReady() {
@@ -32,6 +32,15 @@
       }
 
       function signInWithGoogle() {
+        let config = {
+          apiKey: "AIzaSyDA5tCzxNzykHgaSv1640GanShQze3UK-M",
+          authDomain: "universalgamemaker.firebaseapp.com",
+          databaseURL: "https://universalgamemaker.firebaseio.com",
+          projectId: "universalgamemaker",
+          storageBucket: "universalgamemaker.appspot.com",
+          messagingSenderId: "144595629077"
+        };
+        firebase.initializeApp(config);
         var provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithRedirect(provider).then(function() {
           return firebase.auth().getRedirectResult();

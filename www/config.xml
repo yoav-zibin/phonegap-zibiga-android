@@ -133,15 +133,13 @@
 
     <!-- see: https://github.com/phonegap/phonegap-plugin-push/blob/HEAD/docs/PHONEGAP_BUILD.md -->
     <platform name="android">
-        <resource-file src="google-services.json" target="google-services.json" />
+        <resource-file src="google-services.json" target="/google-services.json" />
     </platform>
     <platform name="ios">
-        <resource-file src="GoogleService-Info.plist" />
+        <resource-file src="GoogleService-Info.plist" target="/GoogleService-Info.plist" />
     </platform>
     <!-- https://www.npmjs.com/package/phonegap-plugin-push -->
-    <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.1.1">
-        <param name="SENDER_ID" value="123456789" />
-    </gap:plugin>
+    <gap:plugin name="phonegap-plugin-push" source="npm" spec="2.1.1" />
 
     <!-- I think the push plugin is adding iOS code that might use the calendar, photos, and bluetooth.
         So Apple rejects the submission with:
