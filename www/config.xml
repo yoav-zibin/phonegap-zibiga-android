@@ -37,7 +37,7 @@
             <path url="/__/auth/callback"/>
         </host>
     </universal-links>
-    <preference name="AndroidLaunchMode" value="singleInstance" />
+    <preference name="AndroidLaunchMode" value="singleTask" />
 
     <!--
       See: https://github.com/apache/cordova-plugin-whitelist
