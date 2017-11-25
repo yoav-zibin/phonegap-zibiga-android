@@ -11,6 +11,10 @@
   <body>
     <textarea id="mylogs" style="width: 100%; height: 100%;">
     </textarea>
+    <button onclick="signInWithGoogle()">Google login</button>
+    <button onclick="signInWithFacebook()">Facebook login</button>
+    <button onclick="signInWithTwitter()">Twitter login</button>
+    <button onclick="signInWithGithub()">Github login</button>
     <button onclick="openShareDialog()">Share!</button>
 
     <script type="text/javascript" src="cordova.js"></script>
@@ -27,11 +31,11 @@
       
       function onDeviceReady() {
         mylog('Got deviceready');
-        setUpFcm();
-        signInWithGoogle();
+        setupFcm();
+        setupFirebase();
       }
 
-      function signInWithGoogle() {
+      function setupFirebase() {
         let config = {
           apiKey: "AIzaSyDA5tCzxNzykHgaSv1640GanShQze3UK-M",
           authDomain: "universalgamemaker.firebaseapp.com",
@@ -41,7 +45,34 @@
           messagingSenderId: "144595629077"
         };
         firebase.initializeApp(config);
-        var provider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth().getRedirectResult().then(function(result) {
+          if (result.credential) {
+            var token = result.credential.accessToken;
+            var user = result.user;
+            mylog('Login succeeded! token=' + token + ' user=' + user.uid);
+          } else {
+            mylog('No redirect Login result');
+          }
+        }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          mylog('Login failed! errorCode=' + errorCode + ' errorMessage=' + errorMessage);
+        });
+      }
+      function signInWithFacebook() {
+        signInWithProvider(new firebase.auth.GoogleAuthProvider());
+      }
+      function signInWithGoogle() {
+        signInWithProvider(new firebase.auth.FacebookAuthProvider());
+      }
+      function signInWithTwitter() {
+        signInWithProvider(new firebase.auth.TwitterAuthProvider());
+      }
+      function signInWithGithub() {
+        signInWithProvider(new firebase.auth.GithubAuthProvider());
+      }
+      function signInWithProvider(provider) {
         firebase.auth().signInWithRedirect(provider).then(function() {
           return firebase.auth().getRedirectResult();
         }).then(function(result) {
@@ -50,16 +81,16 @@
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
-          mylog('Google login succeeded! token=' + token + ' user=' + user.uid);
+          mylog('Login succeeded! token=' + token + ' user=' + user.uid);
         }).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
-          mylog('Google login failed! errorCode=' + errorCode + ' errorMessage=' + errorMessage);
+          mylog('Login failed! errorCode=' + errorCode + ' errorMessage=' + errorMessage);
         });
       }
 
-      function setUpFcm() {
+      function setupFcm() {
         if (!('PushNotification' in window)) {
           mylog("PushNotification not installed!");
           return;
