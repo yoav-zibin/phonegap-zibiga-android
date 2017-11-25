@@ -2,6 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Testing phonegap plugins</title>
   </head>
@@ -9,8 +12,7 @@
     <textarea id="mylogs" style="width: 100%; height: 100%;">
     </textarea>
 
-    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
-    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
     <script>
       function mylog(msg) {
         console.log(msg);
