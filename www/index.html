@@ -51,7 +51,7 @@
       }
 
       function setUpFcm() {
-        if (!PushNotification) {
+        if (!('PushNotification' in window)) {
           mylog("PushNotification not installed!");
           return;
         }
