@@ -12,13 +12,16 @@
     <textarea id="mylogs" style="width: 100%; height: 100%;">
     </textarea>
 
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script>
       function mylog(msg) {
         console.log(msg);
         document.getElementById('mylogs').value += msg + "\n";
       }
 
-      mylog('waiting for deviceready4');
+      mylog('waiting for deviceready5');
       document.addEventListener("deviceready", onDeviceReady);
       
       function onDeviceReady() {
