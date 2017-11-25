@@ -13,11 +13,12 @@
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script>
       function mylog(msg) {
+        console.log(msg);
         document.getElementById('mylogs').value += msg + "\n";
       }
 
-      mylog('waiting for deviceready');
-      document.addEventListener('deviceready', onDeviceReady, false);
+      mylog('waiting for deviceready2');
+      document.addEventListener("deviceready", onDeviceReady);
       
       function onDeviceReady() {
         mylog('Got deviceready');
