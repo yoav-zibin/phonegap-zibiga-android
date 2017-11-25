@@ -11,6 +11,7 @@
   <body>
     <textarea id="mylogs" style="width: 100%; height: 100%;">
     </textarea>
+    <button onclick="openShareDialog()">Share!</button>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
@@ -26,10 +27,10 @@
       
       function onDeviceReady() {
         mylog('Got deviceready');
-        //setUpFcm();
-        //signInWithGoogle();
+        setUpFcm();
+        signInWithGoogle();
       }
-/*
+
       function signInWithGoogle() {
         var provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithRedirect(provider).then(function() {
@@ -88,7 +89,29 @@
           // e.message
         });
       }
-      */
+
+      function openShareDialog() {
+        mylog("openShareDialog");
+        // this is the complete list of currently supported params you can pass to the plugin (all optional)
+        var options = {
+          //message: 'share this', // not supported on some apps (Facebook, Instagram)
+          //subject: 'the subject', // fi. for email
+          //files: ['', ''], // an array of filenames either locally or remotely
+          url: 'https://zibiga.com/',
+          //chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+        }
+
+        var onSuccess = function(result) {
+          mylog("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+          mylog("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+        }
+
+        var onError = function(msg) {
+          mylog("Sharing failed with message: " + msg);
+        }
+
+        window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+      }
     </script>
   </body>
 </html>
