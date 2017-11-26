@@ -33,6 +33,17 @@
         mylog('Got deviceready');
         setupFcm();
         setupFirebase();
+
+      }
+
+      function setupUniversalLinks() {
+        if (!('universalLinks' in window)) {
+          mylog("universalLinks not installed!");
+          return;
+        }
+        universalLinks.subscribe(null, function (eventData) {
+          mylog('Launched application from the link: ' + eventData.url);
+        });
       }
 
       function setupFirebase() {
